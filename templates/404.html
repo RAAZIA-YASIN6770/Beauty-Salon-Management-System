@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Page Not Found" %} - Beauty Salon{% endblock %}
+
+{% block content %}
+<div
+    style="min-height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 2rem;">
+    <div style="max-width: 600px;">
+        <h1
+            style="font-size: 6rem; margin-bottom: 1rem; background: linear-gradient(135deg, var(--primary-color), var(--accent-color)); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+            404</h1>
+        <h2 style="margin-bottom: 1rem;">{% trans "Page Not Found" %}</h2>
+        <p style="color: #666; margin-bottom: 2rem; font-size: 1.1rem;">
+            {% trans "We couldn't find the page you're looking for. It may have been moved or deleted." %}
+        </p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <a href="{% url 'home' %}" class="btn btn-primary">
+                {% trans "Go to Home" %}
+            </a>
+            <a href="{% url 'service_list' %}" class="btn btn-outline">
+                {% trans "View Services" %}
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

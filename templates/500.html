@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Server Error" %} - Beauty Salon{% endblock %}
+
+{% block content %}
+<div
+    style="min-height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 2rem;">
+    <div style="max-width: 600px;">
+        <h1
+            style="font-size: 6rem; margin-bottom: 1rem; background: linear-gradient(135deg, var(--primary-color), var(--accent-color)); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+            500</h1>
+        <h2 style="margin-bottom: 1rem;">{% trans "Something Went Wrong" %}</h2>
+        <p style="color: #666; margin-bottom: 2rem; font-size: 1.1rem;">
+            {% trans "We're experiencing technical difficulties. Our team has been notified and is working to fix the
+            issue." %}
+        </p>
+        <p style="color: #888; margin-bottom: 2rem;">
+            {% trans "Please try again in a few moments. If the problem persists, contact us." %}
+        </p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <a href="{% url 'home' %}" class="btn btn-primary">
+                {% trans "Go to Home" %}
+            </a>
+            <a href="javascript:history.back()" class="btn btn-outline">
+                {% trans "Go Back" %}
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

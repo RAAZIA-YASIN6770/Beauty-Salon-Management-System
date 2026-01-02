@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "My Profile" %} - Beauty Salon{% endblock %}
+
+{% block content %}
+<div style="max-width: 800px; margin: 3rem auto;">
+    <h1 style="text-align: center; margin-bottom: 2rem;">{% trans "My Profile" %}</h1>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+        <!-- Profile Information -->
+        <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+            <h2 style="margin-bottom: 1.5rem;">{% trans "Profile Information" %}</h2>
+
+            <form method="post">
+                {% csrf_token %}
+
+                {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.help_text %}
+                    <small style="display: block; color: #888; margin-top: 5px;">{{ field.help_text }}</small>
+                    {% endif %}
+                    {% for error in field.errors %}
+                    <div style="color: #d9534f; font-size: 0.9rem; margin-top: 5px;">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+                    {% trans "Update Profile" %}
+                </button>
+            </form>
+        </div>
+
+        <!-- Account Actions -->
+        <div>
+            <div
+                style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 1.5rem;">
+                <h2 style="margin-bottom: 1rem;">{% trans "Account Security" %}</h2>
+                <p style="color: #666; margin-bottom: 1.5rem;">
+                    {% trans "Keep your account secure by using a strong password." %}
+                </p>
+                <a href="{% url 'password_change' %}" class="btn btn-outline" style="width: 100%;">
+                    {% trans "Change Password" %}
+                </a>
+            </div>
+
+            <div
+                style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                <h2 style="margin-bottom: 1rem;">{% trans "Account Information" %}</h2>
+                <div style="margin-bottom: 1rem;">
+                    <strong>{% trans "Username:" %}</strong> {{ user.username }}
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <strong>{% trans "Member Since:" %}</strong> {{ user.date_joined|date:"F d, Y" }}
+                </div>
+                <div>
+                    <strong>{% trans "Last Login:" %}</strong> {{ user.last_login|date:"F d, Y H:i" }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    @media (max-width: 768px) {
+        div[style*="grid-template-columns"] {
+            grid-template-columns: 1fr !important;
+        }
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,97 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="{% get_current_language as LANGUAGE_CODE %}{{ LANGUAGE_CODE }}"
+    dir="{% if LANGUAGE_CODE == 'ur' %}rtl{% else %}ltr{% endif %}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Beauty Salon{% endblock %}</title>
+
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="{% url 'home' %}" class="logo">{% trans "Beauty Salon" %}</a>
+
+                <ul class="nav-links">
+                    <li><a href="{% url 'home' %}">{% trans "Home" %}</a></li>
+                    <li><a href="{% url 'service_list' %}">{% trans "Services" %}</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'appointments:dashboard' %}">{% trans "My Appointments" %}</a></li>
+                    <li>
+                        <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline"
+                                style="padding: 0.5rem 1rem; font-size: 0.9rem;">{% trans "Logout" %}</button>
+                        </form>
+                    </li>
+                    {% else %}
+                    <li><a href="{% url 'login' %}">{% trans "Login" %}</a></li>
+                    <li><a href="{% url 'register' %}" class="btn btn-primary">{% trans "Register" %}</a></li>
+                    {% endif %}
+
+                    <li>
+                        <form action="{% url 'set_language' %}" method="post">
+                            {% csrf_token %}
+                            <input name="next" type="hidden" value="{{ request.path }}">
+                            <select name="language" onchange="this.form.submit()" style="padding: 0.3rem; width: auto;">
+                                {% get_current_language as LANGUAGE_CODE %}
+                                {% get_available_languages as LANGUAGES %}
+                                {% get_language_info_list for LANGUAGES as languages %}
+                                {% for language in languages %}
+                                <option value="{{ language.code }}" {% if language.code==LANGUAGE_CODE %}selected{%
+                                    endif %}>{{ language.name_local }}</option>
+                                {% endfor %}
+                            </select>
+                        </form>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            {% if messages %}
+            <div class="messages" style="margin-top: 20px;">
+                {% for message in messages %}
+                <div class="alert {{ message.tags }}"
+                    style="padding: 10px; background-color: #f8d7da; color: #721c24; border-radius: 5px; margin-bottom: 10px;">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            {% block content %}
+            {% endblock %}
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 {% trans "Women's Beauty Salon" %}. {% trans "All Rights Reserved." %}</p>
+        </div>
+    </footer>
+
+    {% block extra_js %}{% endblock %}
+</body>
+
+</html>

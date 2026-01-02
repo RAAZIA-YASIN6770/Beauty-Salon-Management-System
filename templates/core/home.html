@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Home" %} - Beauty Salon{% endblock %}
+
+{% block content %}
+<section class="hero" style="text-align: center; padding: 4rem 0;">
+    <h1 style="font-size: 3rem; margin-bottom: 1rem;">{% trans "Welcome to Your Beauty Sanctuary" %}</h1>
+    <p style="font-size: 1.2rem; margin-bottom: 2rem;">{% trans "Experience premium beauty services in a relaxing,
+        women-only environment." %}</p>
+    <a href="{% url 'service_list' %}" class="btn btn-primary">{% trans "Explore Services" %}</a>
+</section>
+
+<section class="features"
+    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+    <div class="card" style="padding: 2rem; text-align: center;">
+        <h3>{% trans "Expert Stylists" %}</h3>
+        <p>{% trans "Our team of professionals is dedicated to bringing out your best look." %}</p>
+    </div>
+    <div class="card" style="padding: 2rem; text-align: center;">
+        <h3>{% trans "Premium Products" %}</h3>
+        <p>{% trans "We use only high-quality, branded products for all our treatments." %}</p>
+    </div>
+    <div class="card" style="padding: 2rem; text-align: center;">
+        <h3>{% trans "Relaxing Ambience" %}</h3>
+        <p>{% trans "Enjoy a peaceful and luxurious atmosphere designed for your comfort." %}</p>
+    </div>
+</section>
+{% endblock %}

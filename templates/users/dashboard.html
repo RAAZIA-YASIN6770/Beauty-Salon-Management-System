@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "My Dashboard" %} - Beauty Salon{% endblock %}
+
+{% block content %}
+<div class="dashboard-container" style="margin: 3rem 0;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+        <h1>{% trans "Welcome," %} {{ user.first_name|default:user.username }}!</h1>
+        <a href="{% url 'book_appointment' %}" class="btn btn-primary">{% trans "Book New Appointment" %}</a>
+    </div>
+
+    <!-- Upcoming Appointments -->
+    <section style="margin-bottom: 3rem;">
+        <h2 style="border-bottom: 2px solid var(--secondary-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem;">{%
+            trans "Upcoming Appointments" %}</h2>
+
+        {% if upcoming_appointments %}
+        <div style="display: grid; gap: 1.5rem;">
+            {% for appointment in upcoming_appointments %}
+            <div class="card"
+                style="padding: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h3 style="margin-bottom: 0.5rem; color: var(--primary-color);">{{ appointment.package.name }}</h3>
+                    <p><strong>{% trans "Date:" %}</strong> {{ appointment.date }} | <strong>{% trans "Time:"
+                            %}</strong> {{ appointment.time }}</p>
+                    <p style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">{% trans "Status:" %} {{
+                        appointment.get_status_display }}</p>
+                </div>
+                <div style="text-align: right;">
+                    <span style="font-size: 1.2rem; font-weight: bold;">PKR {{ appointment.package.price }}</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p style="background: white; padding: 2rem; border-radius: 8px; text-align: center; color: #666;">
+            {% trans "You have no upcoming appointments." %}
+        </p>
+        {% endif %}
+    </section>
+
+    <!-- Appointment History -->
+    <section style="margin-bottom: 3rem;">
+        <h2
+            style="border-bottom: 2px solid #ddd; padding-bottom: 0.5rem; margin-bottom: 1.5rem; color: #888; font-size: 1.5rem;">
+            {% trans "Appointment History" %}</h2>
+
+        {% if appointment_history %}
+        <div style="display: grid; gap: 1rem;">
+            {% for appointment in appointment_history %}
+            <div
+                style="background: #f9f9f9; padding: 1rem; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; color: #888;">
+                <div>
+                    <strong>{{ appointment.package.name }}</strong> - {{ appointment.date }}
+                </div>
+                <div>
+                    {{ appointment.get_status_display }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p>{% trans "No past appointments found." %}</p>
+        {% endif %}
+    </section>
+
+    <!-- Recommended Packages -->
+    <section>
+        <h2 style="margin-bottom: 1.5rem;">{% trans "Recommended for You" %}</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+            {% for package in recommended_packages %}
+            <div class="card" style="padding: 1.5rem; text-align: center;">
+                <h3 style="font-size: 1.1rem; margin-bottom: 1rem;">{{ package.name }}</h3>
+                <p style="color: var(--primary-color); font-weight: bold; margin-bottom: 1rem;">PKR {{ package.price }}
+                </p>
+                <a href="{% url 'service_detail' package.pk %}" class="btn btn-outline" style="font-size: 0.8rem;">{%
+                    trans "View Details" %}</a>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</div>
+{% endblock %}

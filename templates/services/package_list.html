@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Our Services" %} - Beauty Salon{% endblock %}
+
+{% block content %}
+<div style="margin: 3rem 0;">
+    <h1 style="text-align: center; margin-bottom: 2rem;">{% trans "Our Service Packages" %}</h1>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem;">
+        {% for service in packages %}
+        <div class="card">
+            {% if service.image %}
+            <img src="{{ service.image.url }}" alt="{{ service.name }}"
+                style="width: 100%; height: 200px; object-fit: cover;">
+            {% else %}
+            <div
+                style="width: 100%; height: 200px; background-color: #eee; display: flex; align-items: center; justify-content: center; color: #aaa;">
+                {% trans "No Image" %}
+            </div>
+            {% endif %}
+
+            <div style="padding: 1.5rem;">
+                <div
+                    style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+                    <span
+                        style="background: var(--secondary-color); padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.8rem;">
+                        {{ service.get_category_display }}
+                    </span>
+                    <span style="font-weight: bold; color: var(--primary-color);">PKR {{ service.price }}</span>
+                </div>
+
+                <h3 style="margin-bottom: 0.5rem;">{{ service.name }}</h3>
+                <p
+                    style="color: #666; font-size: 0.9rem; margin-bottom: 1rem; display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                    {{ service.description }}
+                </p>
+
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 0.9rem; color: #888;">
+                        <i style="margin-right: 5px;">&#128337;</i> {{ service.duration }} {% trans "mins" %}
+                    </span>
+                    <a href="{% url 'appointments:book_appointment' service.pk %}" class="btn btn-primary"
+                        style="padding: 0.5rem 1rem; font-size: 0.9rem; margin-right: 5px;">
+                        {% trans "Book Now" %}
+                    </a>
+                    <a href="{% url 'service_detail' service.pk %}" class="btn btn-outline"
+                        style="padding: 0.5rem 1rem; font-size: 0.9rem;">
+                        {% trans "View Details" %}
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p style="text-align: center; grid-column: 1/-1;">{% trans "No service packages available at the moment." %}</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

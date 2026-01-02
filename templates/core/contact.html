@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Contact Us" %} - Beauty Salon{% endblock %}
+
+{% block content %}
+<div style="background: linear-gradient(135deg, var(--bg-color), var(--secondary-color)); padding: 4rem 0;">
+    <div style="max-width: 1000px; margin: 0 auto; padding: 0 2rem;">
+        <h1 style="text-align: center; font-size: 3rem; margin-bottom: 1rem; color: var(--primary-color);">
+            {% trans "Get in Touch" %}
+        </h1>
+        <p style="text-align: center; font-size: 1.2rem; color: #666; margin-bottom: 3rem;">
+            {% trans "We'd love to hear from you! Reach out for appointments or inquiries." %}
+        </p>
+    </div>
+</div>
+
+<div style="max-width: 1200px; margin: 3rem auto; padding: 0 2rem;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;">
+        <!-- Contact Form -->
+        <div style="background: white; padding: 2.5rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+            <h2 style="color: var(--primary-color); margin-bottom: 1.5rem;">{% trans "Send us a Message" %}</h2>
+            <form method="post" action="#">
+                {% csrf_token %}
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    <label for="name" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">{% trans "Your
+                        Name" %}</label>
+                    <input type="text" id="name" name="name" required
+                        style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; font-family: var(--font-body);">
+                </div>
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    <label for="email" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">{% trans "Email
+                        Address" %}</label>
+                    <input type="email" id="email" name="email" required
+                        style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; font-family: var(--font-body);">
+                </div>
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    <label for="phone" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">{% trans "Phone
+                        Number" %}</label>
+                    <input type="tel" id="phone" name="phone" placeholder="+92-XXX-XXXXXXX"
+                        style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; font-family: var(--font-body);">
+                </div>
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    <label for="subject" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">{% trans
+                        "Subject" %}</label>
+                    <input type="text" id="subject" name="subject" required
+                        style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; font-family: var(--font-body);">
+                </div>
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    <label for="message" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">{% trans
+                        "Message" %}</label>
+                    <textarea id="message" name="message" rows="5" required
+                        style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; font-family: var(--font-body); resize: vertical;"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem; font-size: 1rem;">
+                    {% trans "Send Message" %}
+                </button>
+            </form>
+        </div>
+
+        <!-- Contact Information -->
+        <div>
+            <div
+                style="background: white; padding: 2.5rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 2rem;">
+                <h2 style="color: var(--primary-color); margin-bottom: 1.5rem;">{% trans "Contact Information" %}</h2>
+
+                <div style="margin-bottom: 1.5rem;">
+                    <div style="display: flex; align-items: start; gap: 1rem;">
+                        <div
+                            style="width: 40px; height: 40px; background: var(--secondary-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                            📍
+                        </div>
+                        <div>
+                            <h4 style="color: var(--primary-color); margin-bottom: 0.3rem;">{% trans "Address" %}</h4>
+                            <p style="color: #666; line-height: 1.6;">
+                                123 Beauty Street, Gulberg III<br>
+                                Lahore, Punjab 54000<br>
+                                Pakistan
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 1.5rem;">
+                    <div style="display: flex; align-items: start; gap: 1rem;">
+                        <div
+                            style="width: 40px; height: 40px; background: var(--secondary-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                            📞
+                        </div>
+                        <div>
+                            <h4 style="color: var(--primary-color); margin-bottom: 0.3rem;">{% trans "Phone" %}</h4>
+                            <p style="color: #666; line-height: 1.6;">
+                                +92-300-1234567<br>
+                                +92-42-35123456
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 1.5rem;">
+                    <div style="display: flex; align-items: start; gap: 1rem;">
+                        <div
+                            style="width: 40px; height: 40px; background: var(--secondary-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                            ✉️
+                        </div>
+                        <div>
+                            <h4 style="color: var(--primary-color); margin-bottom: 0.3rem;">{% trans "Email" %}</h4>
+                            <p style="color: #666; line-height: 1.6;">
+                                info@rosegoldbeauty.pk<br>
+                                appointments@rosegoldbeauty.pk
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div style="display: flex; align-items: start; gap: 1rem;">
+                        <div
+                            style="width: 40px; height: 40px; background: var(--secondary-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                            🕐
+                        </div>
+                        <div>
+                            <h4 style="color: var(--primary-color); margin-bottom: 0.3rem;">{% trans "Working Hours" %}
+                            </h4>
+                            <p style="color: #666; line-height: 1.6;">
+                                {% trans "Tuesday - Sunday" %}: 10:00 AM - 8:00 PM<br>
+                                {% trans "Monday" %}: {% trans "Closed" %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div
+                style="background: linear-gradient(135deg, var(--primary-color), var(--accent-color)); color: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                <h3 style="color: white; margin-bottom: 1rem;">{% trans "Quick Actions" %}</h3>
+                <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+                    <a href="{% url 'service_list' %}"
+                        style="background: white; color: var(--primary-color); padding: 0.8rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600; text-align: center;">
+                        {% trans "View Our Packages" %}
+                    </a>
+                    <a href="{% url 'appointments:book_appointment' %}"
+                        style="background: rgba(255,255,255,0.2); color: white; padding: 0.8rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600; text-align: center; border: 2px solid white;">
+                        {% trans "Book Appointment" %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 2rem !important;
+        }
+
+        div[style*="grid-template-columns: 1fr 1fr"] {
+            grid-template-columns: 1fr !important;
+        }
+    }
+</style>
+{% endblock %}

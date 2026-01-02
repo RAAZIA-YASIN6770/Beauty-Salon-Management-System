@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{{ package.name }} - Beauty Salon{% endblock %}
+
+{% block content %}
+<div
+    style="margin: 3rem 0; background: var(--white); border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); overflow: hidden;">
+    <div style="display: md-grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+        <div style="height: 400px; background-color: #f9f9f9;">
+            {% if package.image %}
+            <img src="{{ package.image.url }}" alt="{{ package.name }}"
+                style="width: 100%; height: 100%; object-fit: cover;">
+            {% else %}
+            <div
+                style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #aaa;">
+                {% trans "No Image Available" %}
+            </div>
+            {% endif %}
+        </div>
+
+        <div style="padding: 3rem;">
+            <span
+                style="background: var(--secondary-color); padding: 0.3rem 1rem; border-radius: 20px; font-size: 0.9rem;">
+                {{ package.get_category_display }}
+            </span>
+
+            <h1 style="font-size: 2.5rem; margin: 1rem 0;">{{ package.name }}</h1>
+
+            <div style="font-size: 1.5rem; color: var(--primary-color); font-weight: bold; margin-bottom: 2rem;">
+                PKR {{ package.price }}
+            </div>
+
+            <div style="margin-bottom: 2rem;">
+                <h3 style="font-size: 1.2rem;">{% trans "Description" %}</h3>
+                <p style="line-height: 1.8; color: #555;">{{ package.description }}</p>
+            </div>
+
+            <div style="margin-bottom: 2rem;">
+                <strong>{% trans "Duration:" %}</strong> {{ package.duration }} {% trans "minutes" %}
+            </div>
+
+            <a href="{% url 'appointments:book_appointment' package.pk %}" class="btn btn-primary"
+                style="width: 100%; padding: 1rem; display: block; text-align: center; text-decoration: none;">
+                {% trans "Book Appointment" %}
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
