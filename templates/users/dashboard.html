@@ -22,8 +22,7 @@
                 style="padding: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
                 <div>
                     <h3 style="margin-bottom: 0.5rem; color: var(--primary-color);">{{ appointment.package.name }}</h3>
-                    <p><strong>{% trans "Date:" %}</strong> {{ appointment.date }} | <strong>{% trans "Time:"
-                            %}</strong> {{ appointment.time }}</p>
+                    <p><strong>{% trans "Date:" %}</strong> {{ appointment.date }} | <strong>{% trans "Time:" %}</strong> {{ appointment.time }}</p>
                     <p style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">{% trans "Status:" %} {{
                         appointment.get_status_display }}</p>
                 </div>

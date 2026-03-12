@@ -5,8 +5,7 @@
 
 {% block content %}
 <div style="margin: 2rem 0;">
-    <h1 style="text-align: center; margin-bottom: 2rem;">{% trans "Admin Dashboard" %} ({% trans "Appointment
-        Management" %})</h1>
+    <h1 style="text-align: center; margin-bottom: 2rem;">{% trans "Admin Dashboard" %} ({% trans "Appointment Management" %})</h1>
 
     <!-- Revenue and Stats Cards -->
     <div
@@ -38,15 +37,13 @@
         style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 2rem;">
         <form method="get" style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: end;">
             <div style="flex: 1; min-width: 200px;">
-                <label for="search" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">{% trans "Search"
-                    %} ({% trans "Name, Phone, Email" %})</label>
+                <label for="search" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">{% trans "Search" %} ({% trans "Name, Phone, Email" %})</label>
                 <input type="text" name="q" id="search" value="{{ search_query }}"
                     placeholder="{% trans 'Search customers...' %}"
                     style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px;">
             </div>
             <div style="min-width: 150px;">
-                <label for="status" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">{% trans "Status
-                    Filter" %}</label>
+                <label for="status" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">{% trans "Status Filter" %}</label>
                 <select name="status" id="status"
                     style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px;">
                     <option value="">{% trans "All" %}</option>
